@@ -18,61 +18,39 @@ namespace csharp
                 {
                     continue;
                 }
+
+                item.SellIn = item.SellIn - 1;
+
                 switch (item.Name)
                 {
                     case "Aged Brie":
                         IncreaseQuality(item);
+                        if (item.SellIn < 0)
+                            IncreaseQuality(item);
                         break;
                     case "Backstage passes to a TAFKAL80ETC concert":
                         IncreaseQuality(item);
-                        if (item.SellIn < 11)
+                        if (item.SellIn < 10)
                         {
                             IncreaseQuality(item);
                         }
 
-                        if (item.SellIn < 6)
+                        if (item.SellIn < 5)
                         {
                             IncreaseQuality(item);
 
                         }
-
+                        if (item.SellIn < 0)
+                            item.Quality = 0;
                         break;
                     default:
                         if (item.Quality > 0)
                         {
-
                             item.Quality = item.Quality - 1;
-
-                        }
-
-                        break;
-                }
-
-
-                item.SellIn = item.SellIn - 1;
-
-
-                if (item.SellIn < 0)
-                {
-                    if (item.Name == "Aged Brie")
-                    {
-                        IncreaseQuality(item);
-                    }
-                    else
-                    {
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            item.Quality = item.Quality - item.Quality;
-                        }
-                        else
-                        {
-                            if (item.Quality > 0)
-                            {
-
+                            if (item.SellIn < 0)
                                 item.Quality = item.Quality - 1;
-                            }
                         }
-                    }
+                        break;
                 }
             }
         }
